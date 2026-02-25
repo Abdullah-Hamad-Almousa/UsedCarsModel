@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Used Car Prediction</title>
+    <link rel="stylesheet" href="main.css">
+    <!-- ONNX Runtime Web CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+    <script src="model_data.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Used Car Prediction</h1>
+            <p>81% Model Accuracy</p>
+        </header>
+
+        <section class="status-panel">
+            <div id="loader" class="spinner hidden"></div>
+            <div id="status" class="status-indicator">Initializing...</div>
+        </section>
+
+        <main class="tester-card">
+            <form id="prediction-form">
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="condition">Condition</label>
+                        <select id="condition" required>
+                            <option value="0">Salvage</option>
+                            <option value="1">Fair</option>
+                            <option value="2">Good</option>
+                            <option value="3">Excellent</option>
+                            <option value="4">Like New</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="cylinders">Cylinders</label>
+                        <select id="cylinders" required>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="fuel">Fuel Type</label>
+                        <select id="fuel" required>
+                            <option value="0">Diesel</option>
+                            <option value="1">Gas</option>
+                            <option value="2">Electric</option>
+                            <option value="3">Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="odometer">Odometer (Max 10M+)</label>
+                        <input type="number" id="odometer" min="1" max="10000001" placeholder="e.g. 50000" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="transmission">Transmission</label>
+                        <select id="transmission" required>
+                            <option value="0">Manual</option>
+                            <option value="1">Automatic</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="drive">Drive</label>
+                        <select id="drive" required>
+                            <option value="0">FWD</option>
+                            <option value="1">RWD</option>
+                            <option value="2">4WD</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="model">Model Name</label>
+                        <input type="text" id="model" list="model-list" placeholder="e.g. f-150" required>
+                        <datalist id="model-list"></datalist>
+                    </div>
+                    <div class="input-group">
+                        <label for="year">Year (1900 - 2026)</label>
+                        <input type="number" id="year" min="1900" max="2026" placeholder="e.g. 2018" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="run-button" disabled>Predict Price</button>
+            </form>
+
+            <div id="result-container" class="result-display hidden">
+                <h3>Estimated Value:</h3>
+                <div id="result-value" class="prediction-value">---</div>
+            </div>
+        </main>
+
+        <footer>
+            <!-- Lighter footer, removed note -->
+            <p>&copy; 2026 Car Prediction AI</p>
+        </footer>
+    </div>
+    <script src="freq_data.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
